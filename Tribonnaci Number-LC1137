@@ -1,0 +1,11 @@
+int tribonacci(int n) {
+  if(n < 2) return n;
+  if(n == 2) return 1;
+  vector<int> tribVec(n+1,0);
+  tribVec[1] = 1;
+  tribVec[2] = 1;
+  for(int i = 3; i <= n; i++){
+      tribVec[i] = tribVec[i-1] + tribVec[i-2] + tribVec[i-3];
+  }
+  return tribVec[n];
+}
