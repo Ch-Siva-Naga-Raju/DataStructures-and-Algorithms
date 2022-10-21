@@ -1,0 +1,11 @@
+Fibonnaci - Leetcode 509
+
+int fib(int n) {
+        if(n < 2) return n;
+        vector fibVec(n+1,0);
+        fibVec[1] = 1;
+        for(int i = 2; i <= n; i++){
+            fibVec[i] = fibVec[i-1] + fibVec[i-2];
+        }
+        return fibVec[n];
+    }
