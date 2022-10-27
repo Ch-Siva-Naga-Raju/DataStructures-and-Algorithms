@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int robLinear(vector<int>& arr){
+        vector<int> maxLoot(arr.size()+1, 0);
+        maxLoot[0] = arr[0];
+        maxLoot[1] = max(arr[0], arr[1]);
+        maxLoot[2] = max(arr[1], arr[0]+arr[2]);
+        for(int i = 3; i <= arr.size(); i++){
+            if(i < arr.size())
+            maxLoot[i] = max(maxLoot[i-2], maxLoot[i-3]) + arr[i];
+            else
+            maxLoot[i] = max(maxLoot[i-2], maxLoot[i-3]);
+        }
+        return max(maxLoot[arr.size()], maxLoot[arr.size()-1]);
+        
+    }
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 1) return nums[0];
+        if(n == 2) return max(nums[0], nums[1]);
+        if(n == 3) return *max_element(nums.begin(), nums.end());
+        vector<int> loot = nums;
+        loot.pop_back();
+        nums.erase(nums.begin());
+        return max(robLinear(loot), robLinear(nums));
+    }
+};
