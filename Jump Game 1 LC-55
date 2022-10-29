@@ -1,0 +1,14 @@
+bool canJump(vector<int>& nums) {
+        int n = nums.size();
+        vector<bool>dp(n,false);
+        dp[0] = true;
+        int i = 0;
+        while(i < n and !dp[n-1]){
+            if(dp[i]){
+                for(int j = 0; j <= nums[i] and i+j < n; j++)
+                    dp[i+j] = true;
+            }
+            i++;
+        }
+        return dp[n-1];
+    }
