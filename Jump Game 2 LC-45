@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int solution(vector<int>& nums, int position, int jumps){
+        int n = nums.size()-1;
+        int i = position;
+        int newPosition = i;
+        // cout<<i<<","<<nums[i]<<","<<jumps<<","<<n<<"\n";
+        while(newPosition <= i){
+            int mx = 0;
+            if(i+nums[i] < n){
+                int Jmax = 1;
+                for(int j = 1; j <= nums[i]; j++){
+                    if((mx + Jmax) < (nums[i+j] + j)) {
+                        mx = nums[i+j];
+                        newPosition = i+j;
+                        Jmax = j;
+                        // cout<<mx<<","<<mx+Jmax<<","<<nums[i+j]+j<<","<<nums[i,j]<<","<<j<<"\n";
+                    }
+                }
+                
+                return solution(nums,newPosition,jumps+1);
+            }
+            else return jumps+1;
+        }
+        // cout<<i<<","<<jumps<<"\n";
+        return jumps + 1;
+        
+    }
+    int jump(vector<int>& nums) {
+        if(nums.size()==1) return 0;
+        return solution(nums, 0, 0);
+    }
+};
